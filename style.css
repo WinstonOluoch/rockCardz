@@ -1,78 +1,106 @@
-
 @font-face {
-
   font-family: RockFont;
-
   src: url("Funkrocker.otf");
-
 }
 
-.container{
+/* Base Styles */
+.container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    height: 100vh;
+    grid-template-rows: auto 1fr; /* Rows adjust to content */
+    min-height: 100vh; /* Changed from height to min-height to prevent clipping */
     width: 100vw;
 }
 
-
-
 header {
     background: rgb(230, 221, 221);
-    height: 5em;
-
-    grid-column: 1/6;
-    grid-row: 1/2;
+    padding: 1em 0;
+    grid-column: 1 / 6;
+    grid-row: 1 / 2;
 }
 
 h4 {
     font-family: RockFont;
-
+    margin: 10px 0;
 }
 
 .centeredText {
-
   text-align: center;
-
 }
 
 .site-title {
-
   color: white;
-
   font-family: RockFont;
-
   font-weight: bolder;
-
+  font-size: 3rem;
 }
 
 main {
-
-    grid-column: 1/6;
-    grid-row: 2/9;
+    grid-column: 1 / 6;
+    grid-row: 2 / 3;
     display: flex;
     flex-wrap: wrap;
-    
+    justify-content: center; /* Centers cards on the page */
     background-color: rgb(157, 255, 244);
-
+    padding: 20px;
 }
 
-.card{
+.card {
   text-align: center;
-  align-items: center;
   border: 1px solid black;
   width: 175px;
-  height: 300px;
-  margin: 2px;
+  height: auto; /* Fixed: Allows card to grow with text */
+  min-height: 350px; /* Optional: Sets a baseline height */
+  margin: 10px;
+  padding: 15px; /* Added padding so text doesn't touch the borders */
   border-radius: 5px;
   background-color: rgb(239, 238, 237);
-
+  box-sizing: border-box; /* Ensures padding doesn't break the width */
 }
 
 .card img {
     width: 100px;
     height: 150px;
     border: 1px solid black;
+    object-fit: cover; /* Prevents image distortion */
+}
 
+.description p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
 
+/* --- Media Queries --- */
+
+/* For Tablets and smaller laptops */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .site-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* For Mobile Phones */
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        grid-column: 1 / 2;
+    }
+
+    main {
+        grid-column: 1 / 2;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 80%; /* Cards take up more screen width on mobile */
+        max-width: 300px;
+    }
 }
